@@ -18,13 +18,13 @@ const typeDefs = `#graphql
 
 const books = [
 	{
-		id: 0,
+		id: "0",
 		title: "The Awakening",
 		author: "Kate Chopin",
 	},
 
 	{
-		id: 1,
+		id: "1",
 		title: "City of Glass",
 		author: "Paul Auster",
 	},
