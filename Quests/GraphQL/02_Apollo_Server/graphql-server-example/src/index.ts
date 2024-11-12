@@ -28,3 +28,9 @@ const books = [
 		author: "Paul Auster",
 	},
 ];
+
+const resolvers = {
+	Query: {
+		books: () => books,
+	},
+};
