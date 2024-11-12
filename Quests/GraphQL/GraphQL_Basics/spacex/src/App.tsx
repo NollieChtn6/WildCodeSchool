@@ -1,4 +1,5 @@
 import { useQuery, gql } from "@apollo/client";
+import type { Launch } from "./@types/data.t";
 
 import "./App.css";
 
@@ -25,7 +26,13 @@ function App() {
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>Error 💀</p>;
 
-	return <h1>Hello World</h1>;
+	return (
+		<div className="App">
+			{data.launches.map((launch: Launch) => (
+				<li key={launch.id}>{launch.launch_date_utc}</li>
+			))}
+		</div>
+	);
 }
 
 export default App;
