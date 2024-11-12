@@ -11,6 +11,7 @@ const typeDefs = `#graphql
 
   type Query {
     books: [Book]
+    getBookById(bookId: ID): Book
   }
 
 `;
@@ -32,6 +33,7 @@ const books = [
 const resolvers = {
 	Query: {
 		books: () => books,
+		getBookById: (_, args) => books.find((book) => book.id === args.bookId),
 	},
 };
 
