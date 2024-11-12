@@ -4,7 +4,7 @@ import { startStandaloneServer } from "@apollo/server/standalone";
 const typeDefs = `#graphql
 
   type Book {
-    id: id
+    id: ID
     title: String
     author: String
   }
