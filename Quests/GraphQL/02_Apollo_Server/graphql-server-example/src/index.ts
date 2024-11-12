@@ -14,6 +14,10 @@ const typeDefs = `#graphql
     getBookById(bookId: ID): Book
   }
 
+  type Mutation {
+    addBook(title: String, author: String): Book
+  }
+
 `;
 
 const books = [
@@ -34,6 +38,20 @@ const resolvers = {
 	Query: {
 		books: () => books,
 		getBookById: (_, args) => books.find((book) => book.id === args.bookId),
+	},
+	Mutation: {
+		addBook: (_, args) => {
+			const lastId = Number.parseInt(books.at(-1).id, 10);
+			const newId = (lastId + 1).toString();
+			books.push({
+				title: args.title,
+				author: args.author,
+
+				id: newId,
+			});
+
+			return books.at(-1);
+		},
 	},
 };
 
