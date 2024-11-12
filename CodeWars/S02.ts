@@ -70,22 +70,7 @@ export function mango(quantity: number, price: number): number {
 
 // https://www.codewars.com/kata/57e3f79c9cb119374600046b/train/typescript
 
-// Define a method hello that returns "Hello, Name!" to a given name, or says Hello, World! if name is not given (or passed as an empty String).
-
-// Assuming that name is a String and it checks for user typos to return a name with a first capital letter (Xxxx).
-
 type nameType = string | null;
-
-// export function hello(name: nameType): string {
-// 	if (!name || name === "") {
-// 		return "Hello, World!";
-// 	}
-// 	if (name) {
-// 		const formattedName = name[0].toUppercase() + name.slice(1).toLowerCase();
-// 		return `Hello, ${formattedName}`;
-// 	}
-// 	return;
-// }
 
 export function hello(name: nameType): string {
 	if (!name || name === "") {
@@ -97,3 +82,21 @@ export function hello(name: nameType): string {
 	}
 	return "Hello, World!";
 }
+
+// https://www.codewars.com/kata/57a0e5c372292dd76d000d7e/train/typescript
+
+// TODO
+
+// https://www.codewars.com/kata/5266876b8f4bf2da9b000362/train/typescript
+
+// TODO
+
+// https://www.codewars.com/kata/5a1a9e5032b8b98477000004/train/typescript
+
+// TODO
+
+// https://www.codewars.com/kata/57cc981a58da9e302a000214/train/typescript
+
+// TODO
+
+// https://www.codewars.com/kata/563e320cee5dddcf77000158/train/typescript
