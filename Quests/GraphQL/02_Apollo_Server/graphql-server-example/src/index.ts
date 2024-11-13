@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 
@@ -46,10 +47,8 @@ const resolvers = {
 			books.push({
 				title: args.title,
 				author: args.author,
-
 				id: newId,
 			});
-
 			return books.at(-1);
 		},
 	},
