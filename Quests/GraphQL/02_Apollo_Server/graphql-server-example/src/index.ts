@@ -1,6 +1,19 @@
 import "reflect-metadata";
+import { Field, ObjectType } from "type-graphql";
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
+
+@ObjectType()
+class Book {
+	@Field()
+	id: string;
+
+	@Field()
+	title: string;
+
+	@Field()
+	author: string;
+}
 
 const typeDefs = `#graphql
 
@@ -21,7 +34,7 @@ const typeDefs = `#graphql
 
 `;
 
-const books = [
+const books: Book[] = [
 	{
 		id: "0",
 		title: "The Awakening",
