@@ -36,6 +36,15 @@ const typeDefs = `#graphql
 
 `;
 
+@InputType()
+class BookInput {
+  @Field()
+  title: string;
+
+  @Field()
+  author: string
+}
+
 @ObjectType()
 class Book {
 	@Field()
@@ -73,14 +82,6 @@ class BookResolver {
 }
 
 
-@InputType()
-class BookInput {
-  @Field()
-  title: string;
-
-  @Field()
-  author: string
-}
 
 const resolvers = {
 	Query: {
@@ -103,6 +104,6 @@ const resolvers = {
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
-const { url } = await startStandaloneServer(server, { { port: 4000 } });
+const { url } = await startStandaloneServer(server, { listen: { port: 4000 } });
 
 console.log(`🚀  Server ready at: ${url}`);
