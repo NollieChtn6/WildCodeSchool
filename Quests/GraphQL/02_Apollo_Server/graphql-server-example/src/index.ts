@@ -1,19 +1,21 @@
 import "reflect-metadata";
-import { Field, ObjectType } from "type-graphql";
+import { Arg, Field, InputType, Mutation, ObjectType, Query, Resolver } from "type-graphql";
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 
-@ObjectType()
-class Book {
-	@Field()
-	id: string;
+const books: Book[] = [
+	{
+		id: "0",
+		title: "The Awakening",
+		author: "Kate Chopin",
+	},
 
-	@Field()
-	title: string;
-
-	@Field()
-	author: string;
-}
+	{
+		id: "1",
+		title: "City of Glass",
+		author: "Paul Auster",
+	},
+];
 
 const typeDefs = `#graphql
 
@@ -34,19 +36,51 @@ const typeDefs = `#graphql
 
 `;
 
-const books: Book[] = [
-	{
-		id: "0",
-		title: "The Awakening",
-		author: "Kate Chopin",
-	},
+@ObjectType()
+class Book {
+	@Field()
+	id: string;
 
-	{
-		id: "1",
-		title: "City of Glass",
-		author: "Paul Auster",
-	},
-];
+	@Field()
+	title: string;
+
+	@Field()
+	author: string;
+}
+@Resolver(Book)
+class BookResolver {
+	@Query(() => [Book])
+	books() {
+		return books;
+	}
+
+  @Query(() => Book)
+	getBookById(@Arg("id") id: string) {
+		return books.find((book) => book.id === id);
+	}
+
+  @Mutation(() => Book)
+  addBook(@Arg("data") {title, author}: BookInput) {
+    const lastId = Number.parseInt(books.at(-1).id, 10);
+    const newId = (lastId + 1).toString();
+    books.push({
+      title,
+      author,
+      id: newId,
+    });
+    return books.at(-1);
+  }
+}
+
+
+@InputType()
+class BookInput {
+  @Field()
+  title: string;
+
+  @Field()
+  author: string
+}
 
 const resolvers = {
 	Query: {
@@ -69,6 +103,6 @@ const resolvers = {
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
-const { url } = await startStandaloneServer(server, { listen: { port: 4000 } });
+const { url } = await startStandaloneServer(server, { { port: 4000 } });
 
 console.log(`🚀  Server ready at: ${url}`);
